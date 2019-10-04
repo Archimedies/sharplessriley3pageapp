@@ -1,38 +1,21 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import HomeScreen from './views/Home';
-import AboutScreen from './views/About';
-import SettingsScreen from './views/Settings';
 import LoginScreen from './views/Login';
+import Tabs from './views/Tabs';
 
-const tabNavigator = createBottomTabNavigator({
-  Home: HomeScreen,
+const stackNavigator = createStackNavigator({
   Login: LoginScreen,
-  About: AboutScreen,
-  Settings: SettingsScreen
-})
+  tabs: Tabs
+},
+{
+  headerMode: 'none', // remove top bar and make full screen
+  navigationOptions: {
+    headerVisible: false, // remove top bar and make full screen
+  },
+  defaultNavigationOptions: { // remove swipe back gesture
+    gesturesEnabled: false
+  }}
+)
 
-export default createAppContainer(tabNavigator)
-
-
-class App extends Component {
-  render() {
-      return (
-          <View style={styles.container}>
-              <Text>Open up App.js to start working on your app!</Text>
-          </View>
-      );
-  }
-}
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-});
+export default createAppContainer(stackNavigator);
